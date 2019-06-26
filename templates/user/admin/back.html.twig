@@ -313,14 +313,28 @@
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active treeview menu-open">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard"></i> <span>Management</span>
                             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                            <li><a href="{{ path('ingrediant_index') }}"><i class="fa fa-circle-o"></i> Ingredients</a></li>
+                            <li><a href={{ path('plat_index') }}#"><i class="fa fa-circle-o"></i> Dishes</a></li>
+                            <li><a href="{{ path('kit_index') }}"><i class="fa fa-circle-o"></i> Kits</a></li>
+                        </ul>
+                    </li>
+                    <li class="active treeview menu-open">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Customers</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('commande_index') }}"><i class="fa fa-circle-o"></i> Orders</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Complaints</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Newsletters</a></li>
                         </ul>
                     </li>
 
@@ -336,6 +350,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            {% block body %}
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -347,6 +362,7 @@
                     <li class="active">Dashboard</li>
                 </ol>
             </section>
+
 
             <!-- Main content -->
             <section class="content">
@@ -414,6 +430,7 @@
 
             </section>
             <!-- /.content -->
+            {% endblock %}
         </div>
         <!-- /.content-wrapper -->
 

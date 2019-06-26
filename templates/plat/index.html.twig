@@ -1,0 +1,108 @@
+{% extends 'user/admin/back.html.twig' %}
+{% block stylesheets %}
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png"      href="{{ asset('back_tables/images/icons/favicon.ico') }}"/>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/vendor/animate/animate.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/vendor/select2/select2.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/css/main.css') }}">
+    <!--===============================================================================================-->
+{% endblock %}
+{% block title %}Dishes index{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <br>
+        <h1>Dishes index</h1>
+        <br>
+        <div class="table100 ver1" >
+            <table>
+                <thead>
+                <tr class="row100 head">
+                    <th class="cell100" >Name</th>
+                    <th class="cell100" >Description</th>
+                    <th class="cell100" >Recipe</th>
+                    <th class="cell100" >Price</th>
+                    <th class="cell100" >Video</th>
+                    <th class="cell100" >Image</th>
+                    <th class="cell100" >Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for plat in plats %}
+                    <tr class="row100 body">
+                        <td class="cell100 ">{{ plats.name }}</td>
+                        <td class="cell100 ">{{ plats.description }}</td>
+                        <td class="cell100 ">{{ plats.recette }}</td>
+                        <td class="cell100 ">{{ plats.price }}</td>
+                        <td class="cell100 ">{{ plats.video }}</td>
+                        <td class="cell100 ">{{ plats.image }}</td>
+                        <td class="cell100 ">{{ plats.date|date('Y-m-d') }}</td>
+                        <td class="cell100 ">
+                            <a class="btn btn-success" href="{{ path('plat_show', {'id': plats.id}) }}">show</a>
+                            <a class="btn btn-warning" href="{{ path('plat_edit', {'id': plats.id}) }}">edit</a>
+                            <div style="margin-bottom: 5%">
+                                <form method="post" action="{{ path('plat_delete', {'id': plats.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ kits.id) }}">
+                                    <br>
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="row100 body">
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <a class="btn btn-success" href="{{ path('plat_new') }}">Create new</a>
+    </div>
+
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="{{ asset('back_tables/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('back_tables/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('back_tables/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('back_tables/vendor/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('back_tables/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script>
+        $('.js-pscroll').each(function(){
+            var ps = new PerfectScrollbar(this);
+
+            $(window).on('resize', function(){
+                ps.update();
+            })
+
+            $(this).on('ps-x-reach-start', function(){
+                $(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
+            });
+
+            $(this).on('ps-scroll-x', function(){
+                $(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
+            });
+
+        });
+
+
+
+
+    </script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('back_tables/js/main.js')}}"></script>
+{% endblock %}
