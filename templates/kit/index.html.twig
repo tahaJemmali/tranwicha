@@ -31,7 +31,7 @@
                     <th class="cell100" >Description</th>
                     <th class="cell100" >Price</th>
                     <th class="cell100" >Image</th>
-                    <th class="cell100" >Video</th>
+{#                    <th class="cell100" >Video</th>#}
                     <th class="cell100" >Date</th>
                 </tr>
                 </thead>
@@ -41,8 +41,8 @@
                         <td class="cell100 ">{{ kits.name }}</td>
                         <td class="cell100 ">{{ kits.description }}</td>
                         <td class="cell100 ">{{ kits.price }}</td>
-                        <td class="cell100 ">{{ kits.image }}</td>
-                        <td class="cell100 ">{{ kits.video }}</td>
+                        <td class="cell100 "><img src="{{ asset('uploads/'~kits.image) }}" width="100"></td>
+{#                        <td class="cell100 ">{{ kits.video }}</td>#}
                         <td class="cell100 ">{{ kits.createdAt|date('Y-m-d') }}</td>
                         <td class="cell100 ">
                             <a class="btn btn-success" href="{{ path('kit_show', {'id': kits.id}) }}">show</a>

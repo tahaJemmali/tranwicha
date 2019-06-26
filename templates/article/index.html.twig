@@ -15,13 +15,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('back_tables/css/main.css') }}">
     <!--===============================================================================================-->
 {% endblock %}
-{% block title %}Dishes index{% endblock %}
+{% block title %}Kit index{% endblock %}
 
 {% block body %}
 
     <div class="container">
         <br>
-        <h1>Dishes index</h1>
+        <h1>Kit index</h1>
         <br>
         <div class="table100 ver1" >
             <table>
@@ -29,34 +29,23 @@
                 <tr class="row100 head">
                     <th class="cell100" >Name</th>
                     <th class="cell100" >Description</th>
-                    <th class="cell100" >Recipe</th>
-                    <th class="cell100" >Price</th>
-{#                    <th class="cell100" >Video</th>#}
                     <th class="cell100" >Image</th>
-                    <th class="cell100" >Date</th>
+                    <th class="cell100" >Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for plat in plats %}
+                {% for article in articles %}
                     <tr class="row100 body">
-                        <td class="cell100 ">{{ plat.name }}</td>
-                        <td class="cell100 ">{{ plat.description }}</td>
-                        <td class="cell100 ">{{ plat.recette }}</td>
-                        <td class="cell100 ">{{ plat.price }}</td>
-{#                        <td class="cell100 ">#}
-{#                            <iframe width="400" height="300"#}
-{#                                    src=" {{ plat.video }}">#}
-{#                            </iframe>#}
-{#                           </td>#}
-                        <td class="cell100 "><img src="{{ asset('uploads/'~plat.image) }}" width="100" alt=""></td>
-                        <td class="cell100 ">{{ plat.date|date('Y-m-d') }}</td>
+                        <td class="cell100 ">{{ article.title }}</td>
+                        <td class="cell100 ">{{ article.description }}</td>
+                        <td class="cell100 "><img src="{{ asset('uploads/'~article.image) }}" width="100" alt="image-article"></td>
                         <td class="cell100 ">
-                            <a class="btn btn-success" href="{{ path('plat_show', {'id': plat.id}) }}">show</a>
-                            <a class="btn btn-warning" href="{{ path('plat_edit', {'id': plat.id}) }}">edit</a>
+                            <a class="btn btn-success" href="{{ path('article_show', {'id': article.id}) }}">show</a>
+                            <a class="btn btn-warning" href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
                             <div style="margin-bottom: 5%">
-                                <form method="post" action="{{ path('plat_delete', {'id': plat.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <form method="post" action="{{ path('article_delete', {'id': article.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ plat.id) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
                                     <br>
                                     <button class="btn btn-danger">Delete</button>
                                 </form>
@@ -72,7 +61,7 @@
             </table>
         </div>
         <br>
-        <a class="btn btn-success" href="{{ path('plat_new') }}">Create new</a>
+        <a class="btn btn-success" href="{{ path('article_new') }}">Create new</a>
     </div>
 
 

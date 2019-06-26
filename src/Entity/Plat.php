@@ -122,24 +122,24 @@ class Plat
         return $this;
     }
 
-    public function getVideo(): ?string
+    public function getVideo():?string
     {
         return $this->video;
     }
 
-    public function setVideo(?string $video): self
+    public function setVideo( string $video): self
     {
         $this->video = $video;
 
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage( $image)
     {
         $this->image = $image;
 

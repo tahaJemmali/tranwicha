@@ -6,6 +6,7 @@ use App\Entity\Ingrediant;
 use App\Form\IngrediantType;
 use App\Repository\IngrediantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,6 +40,11 @@ class IngrediantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file= $ingrediant->getImage();
+            $filename=md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'),$filename);
+            $ingrediant->setImage($filename);
+            ////////////////////////////////
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ingrediant);
             $entityManager->flush();
@@ -72,10 +78,21 @@ class IngrediantController extends AbstractController
      */
     public function edit(Request $request, Ingrediant $ingrediant): Response
     {
+        $file_path=$this->getParameter('upload_directory').'/'.$ingrediant->getImage();
+        $ingrediant->setImage(
+            new File( $file_path)
+        );
         $form = $this->createForm(IngrediantType::class, $ingrediant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            ///////////////////////////////////
+            $file= $ingrediant->getImage();
+            unlink($file_path);
+            $filename=md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'),$filename);
+            $ingrediant->setImage($filename);
+            ////////////////////////////////
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('ingrediant_index', [
@@ -98,6 +115,8 @@ class IngrediantController extends AbstractController
     public function delete(Request $request, Ingrediant $ingrediant): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ingrediant->getId(), $request->request->get('_token'))) {
+            $file_path=$this->getParameter('upload_directory').'/'.$ingrediant->getImage();
+            unlink($file_path);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($ingrediant);
             $entityManager->flush();

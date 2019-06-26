@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\Plat;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,11 +16,15 @@ class PlatType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
-            ->add('recette')
+            ->add('description',TextareaType::class)
+            ->add('recette',TextareaType::class)
             ->add('price')
-            ->add('video')
-            ->add('image')
+            ->add('video',UrlType::class,array(
+                'label'=>"Choose a video !"
+            ))
+            ->add('image',FileType::class,array(
+                'label'=>"Choose an image !"
+            ))
         ;
     }
 

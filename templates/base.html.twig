@@ -121,54 +121,33 @@
 
                 <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                     <div class="wow fadeInUp section-title" data-wow-delay="0.3s">
-                        <h2>Our Story</h2>
-                        <h4>Your Dining Restaurant since 1989</h4>
+                        <h2>Our Articles</h2>
+                        <h4>Articles sections</h4>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
 
-                <div class="wow fadeInUp col-md-3 col-sm-5" data-wow-delay="0.3s">
-                    <img src="{{ asset('assets/images/about-img.jpg') }}" class="img-responsive" alt="About">
-                    <h3>Nunc ullamcorper suscipit neque, ac malesuada purus molestie non.</h3>
-                </div>
 
-                <div class="wow fadeInUp col-md-5 col-sm-7" data-wow-delay="0.5s">
+
+                <div style="margin-left:23%;width: 630px;"  class="wow fadeInUp col-md-5 col-sm-7" data-wow-delay="0.5s">
 
                     <!-- flexslider -->
                     <div class="flexslider">
                         <ul class="slides">
-
+                            {% for article in articles %}
                             <li>
-                                <img src="{{ asset('assets/images/slide-img1.jpg') }}" alt="Flexslider">
+                                <img  src="{{ asset('uploads/'~article.image) }}" alt="Flexslider">
+                                <div  data-wow-delay="0.9s">
+                                    <h2>{{ article.title }}</h2>
+                                    <p>{{ article.description }}</p>
+                                </div>
                             </li>
-                            <li>
-                                <img src="{{ asset('assets/images/slide-img2.jpg') }}" alt="Flexslider">
-                            </li>
-                            <li>
-                                <img src="{{ asset('assets/images/slide-img3.jpg') }}" alt="Flexslider">
-                            </li>
-
+                            {% endfor %}
                         </ul>
                     </div>
-
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt. Lorem ipsum dolor sit amet.</p>
                 </div>
-
-                <div class="wow fadeInUp col-md-4 col-sm-12" data-wow-delay="0.9s">
-                    <h2>Fine Dining</h2>
-                    <p>Steak House is free HTML website template for everyone. Please inform your friends about Tooplate site.</p>
-                    <p>Vestibulum id iaculis nisl. Pellentesque nec tortor sagittis, scelerisque ante at, sollicitudin leo. Vivamus pulvinar a justo vel lobortis.</p>
-
-                    <ul>
-                        <li>Donec fringilla ipsum</li>
-                        <li>Integer nec urna</li>
-                        <li>Curabitur porta</li>
-                    </ul>
-                </div>
-
             </div>
-        </div>
     </section>
 
 
@@ -195,80 +174,27 @@
 
                 <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                     <div class="wow fadeInUp section-title" data-wow-delay="0.3s">
-                        <h2>Food Menu</h2>
-                        <h4>we have special menus</h4>
+                        <h2>Our kits</h2>
+                        <h4>we have special kits</h4>
                     </div>
                 </div>
+                {% set delay=0.6 %}
+                {% for kit in Kits %}
+                         <div class="col-md-6 col-sm-12">
+                             <div class="media wow fadeInUp" data-wow-delay="{% set delay= delay +0.3 %}s">
+                                 <div class="media-object pull-left">
+                                     <img src="{{ asset('uploads/'~kit.image) }}" class="img-responsive" alt="Food Menu">
+                                     <span class="menu-price">{{ kit.price }} Dt</span>
+                                 </div>
+                                 <div class="media-body">
+                                     <h3 class="media-heading">{{ kit.name }}</h3>
+                                     <p>{{ kit.description }}</p>
+                                 </div>
+                             </div>
+                         </div>
+                {% endfor %}
 
-                <div class="col-md-6 col-sm-12">
-                    <div class="media wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="media-object pull-left">
-                            <img src="{{ asset('assets/images/gallery-img1.jpg') }}" class="img-responsive" alt="Food Menu">
-                            <span class="menu-price">$24</span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Breakfast</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque tempus ac eget diam et.</p>
-                        </div>
-                    </div>
 
-                    <div class="media wow fadeInUp" data-wow-delay="0.9s">
-                        <div class="media-object pull-left">
-                            <img src="{{ asset('assets/images/gallery-img2.jpg') }}" class="img-responsive" alt="Food Menu">
-                            <span class="menu-price">$36</span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">New Pizza</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque tempus ac eget diam et.</p>
-                        </div>
-                    </div>
-
-                    <div class="media wow fadeInUp" data-wow-delay="1.2s">
-                        <div class="media-object pull-left">
-                            <img src="{{ asset('assets/images/gallery-img3.jpg') }}" class="img-responsive" alt="Food Menu">
-                            <span class="menu-price">$24</span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Mushroom</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque tempus ac eget diam et.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                    <div class="media wow fadeInUp" data-wow-delay="1s">
-                        <div class="media-object pull-left">
-                            <img src="{{ asset('assets/images/gallery-img4.jpg') }}" class="img-responsive" alt="Food Menu">
-                            <span class="menu-price">$32</span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Seafood</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque tempus ac eget diam et.</p>
-                        </div>
-                    </div>
-
-                    <div class="media wow fadeInUp" data-wow-delay="1.3s">
-                        <div class="media-object pull-left">
-                            <img src="{{ asset('assets/images/gallery-img5.jpg') }}" class="img-responsive" alt="Food Menu">
-                            <span class="menu-price">$64</span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Spicy Beef</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque tempus ac eget diam et.</p>
-                        </div>
-                    </div>
-
-                    <div class="media wow fadeInUp" data-wow-delay="1.6s">
-                        <div class="media-object pull-left">
-                            <img src="{{ asset('assets/images/gallery-img6.jpg') }}" class="img-responsive" alt="Food Menu">
-                            <span class="menu-price">$45</span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">Dinner</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitquisque tempus ac eget diam et.</p>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -283,7 +209,7 @@
 
                     <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                         <div class="wow fadeInUp section-title" data-wow-delay="0.3s">
-                            <h2>Food Gallery</h2>
+                            <h2>Dishes Gallery</h2>
                             <h4>we have special foods</h4>
                         </div>
                     </div>
@@ -302,11 +228,11 @@
                         <!-- iso box section -->
                         <div class="iso-box-section wow fadeInUp" data-wow-delay="0.9s">
                             <div class="iso-box-wrapper col4-iso-box">
-
+                            {% for plat in plats %}
                                 <div class="iso-box breakfast pizza lunch col-md-4 col-sm-6">
                                     <div class="gallery-thumb">
-                                        <a href="{{ asset('assets/images/gallery-img1.jpg') }}" data-lightbox-gallery="food-gallery">
-                                            <img src="{{ asset('assets/images/gallery-img1.jpg') }}" class="fluid-img" alt="Gallery">
+                                        <a href="{{ asset('uploads/'~plat.image) }}" data-lightbox-gallery="food-gallery">
+                                            <img src="{{ asset('uploads/'~plat.image) }}" class="fluid-img" alt="Gallery">
                                             <div class="gallery-overlay">
                                                 <div class="gallery-item">
                                                     <i class="fa fa-search"></i>
@@ -314,64 +240,9 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <h3>Lorem One</h3>
+                                    <h3>{{ plat.name }}</h3>
                                 </div>
-
-                                <div class="iso-box breakfast lunch dinner col-md-4 col-sm-6">
-                                    <div class="gallery-thumb">
-                                        <a href="{{ asset('assets/images/gallery-img2.jpg') }}" data-lightbox-gallery="food-gallery">
-                                            <img src="{{ asset('assets/images/gallery-img2.jpg') }}" class="fluid-img" alt="Gallery">
-                                            <div class="gallery-overlay">
-                                                <div class="gallery-item">
-                                                    <i class="fa fa-search"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h3>Lorem ipsum two</h3>
-                                </div>
-
-                                <div class="iso-box dinner col-md-4 col-sm-6">
-                                    <div class="gallery-thumb">
-                                        <a href="{{ asset('assets/images/gallery-img3.jpg') }}" data-lightbox-gallery="food-gallery">
-                                            <img src="{{ asset('assets/images/gallery-img3.jpg') }}" class="fluid-img" alt="Gallery">
-                                            <div class="gallery-overlay">
-                                                <div class="gallery-item">
-                                                    <i class="fa fa-search"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h3>Third Lorem ipsum</h3>
-                                </div>
-
-                                <div class="iso-box breakfast col-md-4 col-sm-6">
-                                    <div class="gallery-thumb">
-                                        <a href="{{ asset('assets/images/gallery-img4.jpg') }}" data-lightbox-gallery="food-gallery">
-                                            <img src="{{ asset('assets/images/gallery-img4.jpg') }}" class="fluid-img" alt="Gallery">
-                                            <div class="gallery-overlay">
-                                                <div class="gallery-item">
-                                                    <i class="fa fa-search"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h3>Lorem ipsum fourth</h3>
-                                </div>
-
-                                <div class="iso-box pizza lunch col-md-4 col-sm-6">
-                                    <div class="gallery-thumb">
-                                        <a href="{{ asset('assets/images/gallery-img6.jpg') }}" data-lightbox-gallery="food-gallery">
-                                            <img src="{{ asset('assets/images/gallery-img6.jpg') }}" class="fluid-img" alt="Gallery">
-                                            <div class="gallery-overlay">
-                                                <div class="gallery-item">
-                                                    <i class="fa fa-search"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h3>Sixth Lorem ipsum</h3>
-                                </div>
+                            {% endfor %}
 
                             </div>
                         </div>

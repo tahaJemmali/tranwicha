@@ -38,7 +38,7 @@
                         <tr class="row100 body">
                             <td class="cell100 ">{{ ingrediant.name }}</td>
                             <td class="cell100 ">{{ ingrediant.description }}</td>
-                            <td class="cell100 ">{{ ingrediant.image }}</td>
+                            <td class="cell100 "><img src="{{ asset('uploads/'~ingrediant.image) }}" width="100"></td>
                             <td class="cell100 ">
                                 <a class="btn btn-success" href="{{ path('ingrediant_show', {'id': ingrediant.id}) }}">show</a>
                                 <a class="btn btn-warning" href="{{ path('ingrediant_edit', {'id': ingrediant.id}) }}">edit</a>
