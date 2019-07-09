@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chart{% endblock %}
+
+{% block stylesheets %}
+
+      <link rel="stylesheet" href="{{ asset('assets_panier/vendors/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_panier/vendors/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_panier/vendors/linericon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_panier/vendors/owl-carousel/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_panier/vendors/owl-carousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_panier/vendors/nice-select/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_panier/vendors/nouislider/nouislider.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('assets_panier/css/style.css') }}">
+
+{% endblock %}
+{% block body %}
+    <br>  <br>  <br>
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set total = 0 %}
+                        {% for article in panier %}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="img/cart/cart3.png" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        {{  article['article'].name }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td><img width="100" src="{{ asset('uploads/'~article['article'].image ) }}" /></td>
+                            <td>
+                                {{  article['article'].price }}
+                            </td>
+                            <input type="hidden" id="price{{loop.index }}" name="" value=" {{ article['article'].price }}" >
+                            <td>
+                                <div class="product_count">
+                                    <input type="text" name="qty" id="sst{{ loop.index }}" maxlength="12" value="{{ article['quantity'] }}" title="Quantity:"
+                                           class="input-text qty">
+                                    <button onclick="var result = document.getElementById('sst{{ loop.index }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                    <button onclick="var result = document.getElementById('sst{{ loop.index }}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                            class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>${{ article['quantity']*article['article'].price }}</h5>
+                                {% set total=total+(article['quantity']*article['article'].price) %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="bottom_button">
+                            <td>
+                                <a onclick="load()" class="button" style="margin-left: 60%" href="#">Update Cart</a>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <h5>Subtotal </h5>
+                            </td>
+                            <td >
+                                <h4>
+                                    <div id="total" >
+                                        {{ total }}<span>Dt</span>
+                                    </div>
+                                </h4>
+                            </td>
+                        </tr>
+                        <script>
+                            function load() {
+                                var total=0;
+                                for(var i=1;i<={{ panier|length }};i++)
+                                {
+                                    var element=document.getElementById("sst"+i.toString());
+                                    var dd=element.value;
+                                    var price=document.getElementById("price"+i.toString());
+                                    var rr=price.value;
+
+                                    total=total+(dd*rr );
+                                }
+                                document.getElementById("total").innerHTML=total+"Dt";
+                            }
+
+                        </script>
+                        <tr class="out_button_area">
+                            <td class="d-none-l">
+
+                            </td>
+                            <td class="">
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="gray_btn" href="#">Continue Shopping</a>
+                                    <a class="primary-btn ml-2" href="#">Proceed to checkout</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets_panier/vendors/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets_panier/vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets_panier/vendors/skrollr.min.js') }}"></script>
+    <script src="{{ asset('assets_panier/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets_panier/vendors/nice-select/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets_panier/vendors/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('assets_panier/vendors/mail-script.js') }}"></script>
+    <script src="{{ asset('assets_panier/js/main.js') }}"></script>
+{% endblock %}
+{% block footer %}
+{% endblock %}

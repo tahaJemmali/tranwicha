@@ -108,6 +108,17 @@ class PlatController extends AbstractController
     }
 
     /**
+     * @Route("front/{id}", name="plat_show_front", methods={"GET"})
+     * @param Plat $plat
+     * @return Response
+     */
+    public function showFront(Plat $plat): Response
+    {
+        return $this->render('plat/showFront.html.twig', [
+            'plat' => $plat,
+        ]);
+    }
+    /**
      * @Route("/{id}", name="plat_delete", methods={"DELETE"})
      * @param Request $request
      * @param Plat $plat

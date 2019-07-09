@@ -18,6 +18,8 @@ class KitController extends AbstractController
 {
     /**
      * @Route("/", name="kit_index", methods={"GET"})
+     * @param KitRepository $kitRepository
+     * @return Response
      */
     public function index(KitRepository $kitRepository): Response
     {
@@ -28,6 +30,9 @@ class KitController extends AbstractController
 
     /**
      * @Route("/new", name="kit_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request): Response
     {
@@ -56,7 +61,21 @@ class KitController extends AbstractController
     }
 
     /**
+     * @Route("front/{id}", name="kit_show_front", methods={"GET"})
+     * @param Kit $kit
+     * @return Response
+     */
+    public function showFront(Kit $kit): Response
+    {
+        return $this->render('kit/showFront.html.twig', [
+            'kit' => $kit,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="kit_show", methods={"GET"})
+     * @param Kit $kit
+     * @return Response
      */
     public function show(Kit $kit): Response
     {
@@ -65,8 +84,12 @@ class KitController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="kit_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Kit $kit
+     * @return Response
      */
     public function edit(Request $request, Kit $kit): Response
     {
@@ -100,6 +123,9 @@ class KitController extends AbstractController
 
     /**
      * @Route("/{id}", name="kit_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Kit $kit
+     * @return Response
      */
     public function delete(Request $request, Kit $kit): Response
     {

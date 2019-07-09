@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/article")
+ * @Route("/{_locale}/article")
  */
 class ArticleController extends AbstractController
 {
@@ -66,6 +66,18 @@ class ArticleController extends AbstractController
     public function show(Article $article): Response
     {
         return $this->render('article/show.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("front/{id}", name="article_show_front", methods={"GET"})
+     * @param Article $article
+     * @return Response
+     */
+    public function showFront(Article $article): Response
+    {
+        return $this->render('article/showFront.html.twig', [
             'article' => $article,
         ]);
     }
@@ -127,4 +139,6 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('article_index');
     }
+
+    
 }

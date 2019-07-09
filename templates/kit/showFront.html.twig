@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kit{% endblock %}
+
+{% block stylesheets %}
+    
+<link href="{{ asset('assets_product/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets_product//plugins/flexslider/flexslider.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets_product/styles/product.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets_product/styles/product_responsive.css') }}">
+{% endblock %}
+{% block body %}
+    <!-- Product -->
+    <div class="product">
+        <div class="container">
+            <div class="row">
+
+                <!-- Product Image -->
+                <div class="col-lg-6">
+                    <div class="product_image_slider_container">
+                        <div id="slider" class="flexslider">
+                            <ul class="slides">
+                                <li>
+                                    <div><img src="{{ asset('uploads/'~kit.image ) }}" /></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-6 product_col">
+
+                            <h2 class="product_info">{{ kit.name }}</h2>
+                            <div class="product_price">{{ kit.price }}Dt</div>
+                            <br><br>
+                            <h3>Description :</h3>
+                            <h4>{{ kit.description }}</h4>
+                    <input type="number" name="quantity" id="quantity" class="form-control">
+                    <a href="{{ path('panier_add', {'id': kit.id}) }}" data-class="App\Entity\Kit" id="add-to-basket" class="btn btn-success" style="  padding: 15px 32px;  font-size: 50px;" type="submit">Add to basket</a>
+                        </div>
+                    </div>
+                </div>
+
+</div>
+{% endblock %}
